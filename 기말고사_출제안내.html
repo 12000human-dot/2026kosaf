@@ -531,6 +531,74 @@
 </head>
 <body>
 
+<style>
+  #pw-overlay {
+    position: fixed; inset: 0;
+    background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  #pw-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+  #pw-box .lock-icon { font-size: 2.8rem; margin-bottom: 12px; }
+  #pw-box h2 { font-size: 1.15rem; color: #1a3a5c; margin-bottom: 6px; }
+  #pw-box p  { font-size: 0.82rem; color: #888; margin-bottom: 22px; }
+  #pw-input {
+    width: 100%; padding: 11px 14px;
+    border: 2px solid #dde3ea;
+    border-radius: 8px; font-size: 1rem;
+    outline: none; text-align: center;
+    letter-spacing: 4px;
+    box-sizing: border-box;
+    transition: border-color .2s;
+  }
+  #pw-input:focus { border-color: #1a3a5c; }
+  #pw-btn {
+    margin-top: 14px; width: 100%;
+    padding: 12px; background: #1a3a5c;
+    color: #fff; border: none; border-radius: 8px;
+    font-size: 1rem; cursor: pointer;
+    transition: background .2s;
+  }
+  #pw-btn:hover { background: #245080; }
+  #pw-error {
+    margin-top: 10px; font-size: 0.82rem;
+    color: #e74c3c; display: none;
+  }
+</style>
+
+<div id="pw-overlay">
+  <div id="pw-box">
+    <div class="lock-icon">🔒</div>
+    <h2>2026-1학기 기말고사 출제안내</h2>
+    <p>접근하려면 비밀번호를 입력하세요.</p>
+    <input id="pw-input" type="password" placeholder="비밀번호" maxlength="20"
+           onkeydown="if(event.key==='Enter')checkPw()">
+    <button id="pw-btn" onclick="checkPw()">확인</button>
+    <div id="pw-error">비밀번호가 올바르지 않습니다.</div>
+  </div>
+</div>
+
+<script>
+  function checkPw() {
+    const val = document.getElementById('pw-input').value;
+    if (val === 'global2026') {
+      document.getElementById('pw-overlay').style.display = 'none';
+    } else {
+      document.getElementById('pw-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+</script>
+
+
 <!-- ── Header ── -->
 <header class="site-header">
   <div class="logo">AI영어학과</div>
